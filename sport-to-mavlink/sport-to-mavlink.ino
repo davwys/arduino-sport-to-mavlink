@@ -26,6 +26,8 @@ FrSkySportSensorAss ass;                               // Create ASS sensor with
 FrSkySportSensorFcs fcs;                               // Create FCS-40A sensor with default ID (use ID8 for FCS-150A)
 FrSkySportSensorGps gps;                               // Create GPS sensor with default ID
 FrSkySportSensorRpm rpm;                               // Create RPM sensor with default ID
+FrSkySportSensorFlvss flvss1;                          // Create FLVSS sensor with default ID
+FrSkySportSensorFlvss flvss2(FrSkySportSensor::ID15);  // Create FLVSS sensor with given ID
 FrSkySportSensorSp2uart sp2uart;                       // Create SP2UART Type B sensor with default ID
 FrSkySportSensorVario vario;                           // Create Variometer sensor with default ID
 #ifdef POLLING_ENABLED
@@ -138,19 +140,19 @@ void decodeSportData(){
     displayTime = currentTime + 1000;
 
     // Get airspeed sensor (ASS) data
-    airspeed = ass.getSpeed()); // Airspeed in km/h
+    airspeed = ass.getSpeed(); // Airspeed in km/h
   
     // Get current/voltage sensor (FCS) data
-    current_battery = fcs.getCurrent()); // Current consumption in amps
-    voltage_battery = fcs.getVoltage()); // Battery voltage in volts
+    current_battery = fcs.getCurrent(); // Current consumption in amps
+    voltage_battery = fcs.getVoltage(); // Battery voltage in volts
   
     // Get GPS data
-    lat = gps.getLat()                  // GPS Latitude
-    lon = gps.getLon(),                 // GPS Longitude in degrees decimal (positive for N/E, negative for S/W)
-    gps_alt = gps.getAltitude());       // Altitude in m (can be negative)
-    groundspeed = gps.getSpeed());      // Speed in m/s
+    lat = gps.getLat();                 // GPS Latitude
+    lon = gps.getLon();                 // GPS Longitude in degrees decimal (positive for N/E, negative for S/W)
+    gps_alt = gps.getAltitude();       // Altitude in m (can be negative)
+    groundspeed = gps.getSpeed();      // Speed in m/s
     fixType = 3;                        // Manually set GPS to 3D fix if position is obtained
-    heading = gps.getCog());            // Course over ground in degrees (0-359, 0 = north)
+    heading = gps.getCog();            // Course over ground in degrees (0-359, 0 = north)
     yaw = heading;  //Set yaw to heading value
 
     //TODO check whether we need this data
@@ -159,7 +161,7 @@ void decodeSportData(){
     //Serial.print("V, ADC4 = "); Serial.print(sp2uart.getAdc4()); Serial.println("V"); // ADC4 voltage in volts
   
     // Get variometer data (altitude in m, VSI in m/s)
-    alt = vario.getAltitude());       // Altitude in meters (can be negative)
+    alt = vario.getAltitude();       // Altitude in meters (can be negative)
     climbrate = vario.getVsi();       // Vertical speed in m/s (positive - up, negative - down)
 
   }  
