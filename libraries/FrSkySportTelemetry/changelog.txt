@@ -1,0 +1,76 @@
+FrSkySportTelemetry library changelog
+--------------------------------------
+Version 20190824
+  [NEW] Added support for ESP8266 boards
+
+Version 20180402
+  [NEW] Added sending the RxBatt data when polling is enabled
+  [NEW] Added method for setting the RSSI and RxBatt to the FrSkySportTelemetry class (effective only when polling is enabled)
+  [NEW] Updated the FrSkySportTelemetryExample
+  [FIX] Minor editorial corrections
+
+Version 20171114
+  [FIX] Removed unnecessary debug message from FrSkySportDecoder.cpp
+
+Version 20160919
+  [NEW] Added support for Teensy LC, 3.5 and 3.6 boards and updated examples
+  [NEW] Added note about MLVSS sensor in the FLVSS sensor class
+
+Version 20160818
+  [NEW] Added simplified polling to the FrSkySportTelemetry and FrSkySportDecoder class
+  [NEW] Added POLLING_ENABLED define to examples to simplify switching the polling on/off
+  [NEW] Removed separate connection diagrams for decoder, as the connection is now the same for both emulator and decoder classes
+
+Version 20160324
+  [NEW] Increased the max number of sensors from 10 to 28 (to cover all possible sensor IDs)
+
+Version 20160313
+  [FIX] Added missing getAccX, getAccY and getAccZ function names to keywords file for syntax highlighting
+  [FIX] Added missing getCell7 - getCell12 function names to keywords file for syntax highlighting
+  [FIX] Changed the FrSkySportSensorTaranisLegacy decoder class name to FrSkySportSensorXjt
+  [NEW] Added usage example for the FrSkySportSensorXjt decoder class (FrSkySportXjtDecoderExample)
+  [NEW] Added decoding of ADC1, ADC2, RSSI, SWR and RxBatt data to FrSkySportSensorXjt
+  [NEW] Added decoding of vertical speed from FVAS sensor (not documented in FrSky spec, added based on OpenTX sources)
+
+Version 20151108
+  [FIX] For combined values decoded by the FrSkySportSensorTaranisLegacy sensor the data ID is only returned when complete value has been decoded
+  [FIX] Fixed handling empty FLVSS data message that was crashing the decoder
+  [NEW] Added defines for FrSkySportSensorTaranisLegacy sensor decoded values
+  [NEW] Added decoded value IDs to keywords file for syntax highlighting
+  [NEW] Added clarification about different IDs used by FCS-40A and FCS-150A sensors in examples and sensor class header file
+
+Version 20151020
+  [FIX] Stuffing was not used for CRC, fixed
+  [FIX] Fixed lat/lon calculation in FrSkySportSensorTaranisLegacy sensor
+
+Version 20151018
+  [NEW] Added Taranis legacy telemetry decoder class (which decodes data that Taranis spits out on teh S.Port mirror when it receives old FrSky Telemetry Hub data)
+  [NEW] Added CRC checking in decoder class
+  [NEW] Added return result (decoded appId) to decode methods and updated the decoder example
+  [FIX] Removed redundant CRC calculations in FrSkySportSingleWireSerial class
+  [FIX] Simplified cell voltage decoding
+
+Version 20151008
+  [NEW] Added Decoder class and decoding functions to sensors (plus the decoder usage example)
+  [FIX] In RPM sensor changed the rpm value type to integer, t1/t2 are now properly rounded
+  [FIX] Minor editorial corrections
+
+Version 20150921
+  [NEW] Added airspeed (ASS-70/ASS-100) sensor.
+
+Version 20150725
+  [NEW] Added data transmission periods to ensure telemetry receiver is not flooded with data
+  [NEW] Added SP2UART (type B) sensor. Note that only analog ports ADC3 and ADC4 are implemented, not the UART part.
+
+Version 20150319
+  [FIX] corrected setting the 328p serial pin to the right mode when transmitting/receiving. This shall help when chaining the adapter with other sensors. Note that a 4.7kohm resistor is recommended to protect the S.Port data line.
+
+Version 20141129
+  [FIX] fixed incorrect display of GPS coordinates on 328p platform (caused by wrong usage of abs function)
+
+Version 20141120
+  [NEW] added support for 328P based boards (e.g. Pro Mini, Nano, Uno)
+  [NEW] added connection diagrams
+
+Version 20140914
+  initial version of the library
