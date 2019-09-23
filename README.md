@@ -10,8 +10,8 @@ Note that the sketch is currently in Beta state, as there is still more testing 
 ## Wiring
 
 Here's how to wire up an Arduino Nano for this project. Note that for other Arduinos, pinouts may vary.
-This graph assumes the arduino is powered with 5V via USB - you can power it directly from the TX module as well, but make sure the voltage matches what your Arduino supports!
-Full Bluetooth module support coming soon!
+This graph assumes the arduino is powered with 5V via USB - you can power it directly from the TX module as well (for example if you want to connect via BT), but make sure the voltage matches what your Arduino supports!
+Bluetooth was tested with a HC-05 module at 38400 bauds, others will most likely work as well. If you need a different baud rate, make sure to change it in the setup{}.
 
 ![Alt text](wiring.jpg?raw=true "Title")
 
@@ -25,11 +25,10 @@ Tested with:
 ## Installation & Testing
 
 Simply flash the .ino file on any Arduino (tested on Arduino Nano), don't forget to include the provided libraries.
-The Arduino will then provide MAVLink telemetry data through its USB port at 115200 bauds. The code can be adapted relatively easily to provide data through other outputs (such as a bluetooth module) by changing the output functions to output on another Serial interface. Included Bluetooth module support coming soon!
+The Arduino will then provide MAVLink telemetry data through its USB port at 115200 bauds, as well as at 38400 bauds on the optional Bluetooth module.
 
-From your groundstation application, simply choose the appropriate COM port, set baud rate to 57600 and hit "connect".
+From your groundstation application, simply choose the appropriate COM port (or bluetooth device), set baud rate to 115200 for USB or 38400 for Bluetooth and hit "connect".
 If you are using Mission Planner, you might have to skip parameter fetching, as the Arduino does not output any parameter data.
-
 
 
 ## Currently supported applications
