@@ -73,6 +73,10 @@ float battery_remaining = 0.0;  // Remaining battery percentage
 float voltage_battery = 0.0;    // Battery voltage in V
 float current_battery = 0.0;    // Battery current in A
 
+// Setup softwareSerial for Bluetooth on Pins D5 & D6
+SoftwareSerial BTSerial(5,6); // HC-05 TX | HC-05 RX
+
+
 // Sensor decoder setup, defaults to Pin 2 (D2 on Arduino Nano)
 void setup() {
     // Configure the decoder serial port and sensors (remember to use & to specify a pointer to sensor)
@@ -84,6 +88,8 @@ void setup() {
 
   //Serial defaults to 115200 bauds
   Serial.begin(115200);
+  
+  BTSerial.begin(38400);
 }
  
 
@@ -152,13 +158,17 @@ void decodeSportData(){
   
     // Send GPS and altitude data
     command_gps(system_id, component_id, upTime, fixType, lat, lon, alt, gps_alt, heading, groundspeed, gps_hdop, gps_sats);
-  
+
+
+    //
+    //  The following commands are disabled for now due to performance issues on the Arduino Nano
+    //
+    
     // Send HUD data (speed, heading, climbrate etc.)
     //command_hud(system_id, component_id, airspeed, groundspeed, heading, throttle, alt, climbrate);
   
     // Send attitude data to artificial horizon
     //command_attitude(system_id, component_id, upTime, roll, pitch, yaw);
-  
 
   }  
 }
@@ -186,6 +196,7 @@ void command_heartbeat(uint8_t system_id, uint8_t component_id, uint8_t system_t
  
   // Send the message
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
 
 
@@ -209,6 +220,7 @@ void command_status(uint8_t system_id, uint8_t component_id, float battery_remai
   
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
 
 
@@ -235,6 +247,7 @@ void command_gps(int8_t system_id, int8_t component_id, int32_t upTime, int8_t f
   
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
 
 /************************************************************
@@ -257,6 +270,7 @@ void command_hud(int8_t system_id, int8_t component_id, float airspeed, float gr
   
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
 
 /************************************************************
@@ -281,6 +295,7 @@ void command_attitude(int8_t system_id, int8_t component_id, int32_t upTime, flo
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
 
 
@@ -309,4 +324,5 @@ void command_globalgps(int8_t system_id, int8_t component_id, int32_t upTime, fl
   uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
   // Send the message (.write sends as bytes)
   Serial.write(buf, len);
+  BTSerial.write(buf, len);
 }
