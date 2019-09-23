@@ -10,7 +10,7 @@ Note that the sketch is currently in Beta state, as there is still more testing 
 ## Wiring
 
 Here's how to wire up an Arduino Nano for this project. Note that for other Arduinos, pinouts may vary.
-This graph assumes the arduino is powered with 5V via USB - you can power it directly from the TX module as well (for example if you want to connect via BT), but make sure the voltage matches what your Arduino supports!
+This graph assumes the arduino is powered with 5V via USB - you can power it directly from the TX module as well (by connecting to + on the S.Port), but make sure the voltage matches what your Arduino supports!
 Bluetooth was tested with a HC-05 module at 38400 bauds, others will most likely work as well. If you need a different baud rate, make sure to change it in the setup{}.
 
 ![Alt text](wiring.jpg?raw=true "Title")
